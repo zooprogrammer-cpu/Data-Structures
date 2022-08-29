@@ -6,13 +6,18 @@ const flights =
 
 // Data needed for first part of the section
 const restaurant = {
-  name: 'Classico Italiano',
+  restName: 'Classico Italiano',
   location: 'Via Angelo Tavanti 23, Firenze, Italy',
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
   order : function(starterIndex, mainIndex){
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]]
+  },
+
+  orderDelivery: function ({starterIndex, mainIndex, time, address}){
+    console.log(`Order Received ${starterIndex} and ${mainIndex} and ${this.mainMenu[mainIndex]}
+    will be delivered to ${address} at ${time} `)
   },
 
   openingHours: {
@@ -29,36 +34,61 @@ const restaurant = {
       close: 24,
     },
   },
-};
+}
 
-// const arr = [2,3,4]
-// const [x,y,z] = arr
-// console.log(x,y,z);
+restaurant.orderDelivery({
+  time: '22:30',
+  address : 'Via de Sole',
+  mainIndex : 2,
+  starterIndex: 2
+});
 
-let [main, secondary] = restaurant.categories
-console.log(main,secondary); // Italian – "Pizzeria"
-// Flip variables
-[main,secondary] = [secondary, main] 
+restaurant.orderDelivery({
+  address : '314 Omega St',
+  mainIndex : 1,
+  starterIndex: 2  
+});
 
-console.log(main,secondary); //Pizzeria – "Italian"
+// Object Destructuring
+const {restName, openingHours, categories} = restaurant
 
-console.log(restaurant.order(2,0)) //["Garlic Bread", "Pizza"] 
+console.log(restName, openingHours, categories);
+// changing the variable names 
+const {restName : restaurantName, openingHours : hours , categories : tags} = restaurant
 
-//Receive 2 return values from a function
-const [starter, mainCourse] = restaurant.order(2,0) 
-console.log([starter, mainCourse]); //prints ["Garlic Bread", "Pizza"]
+console.log(restaurantName, hours, tags);
 
-//Nested destructuring
-const nested = [2,4,[5,6]]
+//Deafult values
+const {menu=[], starterMenu : starters =[]} = restaurant
 
-const [i,,[j,k]] = nested
+console.log(menu,starters);
+//[] (0) // this is the empty default array for menu
+//["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"] (4)
 
-console.log(i,j,k); // prints 2,5,6
+//Mutating varaibles - not working.. working agter adding semi-colon after object declaration
+let a = 111
+let b = 999
 
-//Default values
-// When we do not know the length of an array
-const [p,q,r] = [8,9]
-console.log(p,q,r); // undefined for r since we did not know it was empty
-// so we can setup default values
-const [m=1,n=1,o=1] = [8,9]
-console.log(m,n,o); //prints 8,9,1 sets the value of o as 1
+const obj = {a: 23, b: 56 , c: 77};
+//{a,b} = obj // this results in an error
+({a,b} = obj)
+console.log(a,b)
+
+/// Nested Objects Destructuring
+
+const {fri:{open,close}} = openingHours
+console.log(open,close); //11 – 23
+
+//can also rename the variable names here
+const {fri:{open:o,close:c}} = openingHours
+console.log(o,c); //11 – 23
+
+
+
+
+
+
+
+
+
+
