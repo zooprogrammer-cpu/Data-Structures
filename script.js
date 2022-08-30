@@ -1,12 +1,27 @@
 'use strict';
+const weekdays = ['mon','tue','wed','thu','fri']
 
+const openingHours = {
+  [weekdays[3]]:{
+    open: 12,
+    close: 22
+  },
+  [weekdays[4]]:{
+    open: 12,
+    close: 24
+  },
+  [`day-${2+4}`]:{
+    open: 8,
+    close: 11
+  }
+}
 const restaurant = {
   name: 'Classico Italiano',
   location: 'Via Angelo Tavanti 23, Firenze, Italy',
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-
+  openingHours,
   // ES6 enhanced object literals
 
   order(starterIndex, mainIndex) {
@@ -30,36 +45,9 @@ const restaurant = {
     console.log(otherIngredients);
   },
 };
-// FOR OF LOOP - can continue or break 
-const menu = [...restaurant.starterMenu, ...restaurant.mainMenu]
-for (const item of menu){
-  console.log(item);
-}
 
-for(const item of menu.entries()){
-  console.log(`item`);
-}
+console.log(restaurant);
 
-console.log([...menu.entries()]);
-//[Log] Focaccia (script.js, line 36)
-// [Log] Bruschetta (script.js, line 36)
-// [Log] Garlic Bread (script.js, line 36)
-// [Log] Caprese Salad (script.js, line 36)
-// [Log] Pizza (script.js, line 36)
-// [Log] Pasta (script.js, line 36)
-// [Log] Risotto (script.js, line 36)
-
-for (const [i,el] of menu.entries()){
-  console.log(`${i+1}: ${el}`);
-}
-
-//prints [Log] 1: Focaccia (script.js, line 53)
-// [Log] 2: Bruschetta (script.js, line 53)
-// [Log] 3: Garlic Bread (script.js, line 53)
-// [Log] 4: Caprese Salad (script.js, line 53)
-// [Log] 5: Pizza (script.js, line 53)
-// [Log] 6: Pasta (script.js, line 53)
-// [Log] 7: Risotto (script.js, line 53)
-// [Log] Live reload enabled. (127.0.0.1, line 64)
+//
 
 
