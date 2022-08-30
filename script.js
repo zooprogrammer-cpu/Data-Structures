@@ -126,4 +126,39 @@ restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach')
 restaurant.orderPizza('mushrooms') // prints mushrooms []
 
 
+// SHORT CIRCUIT
+// If first value is a truthy value, it returns it immediately and not even take a look at the second value
+console.log('---------OR---------');
+console.log(3 || 'Jonas'); //prints 3
+console.log('' || 'Jonas'); //prints Jonas
+console.log(true || 0); //prints true
+console.log(undefined || null); //prints null
+
+console.log(undefined || 0 || '' || 'Hello' || 23 || null); //prints Hello
+
+// restaurant.numGuests = 23
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10
+console.log(guests1); //prints 10
+
+const guests2 = restaurant.numGuests || 10
+console.log(guests2); //prints 10
+console.log('-----------AND----------');
+// When there is truthy, the evaluation continues and last value is returned
+console.log(0 && 'Jonas'); // prints 0
+console.log(7 && 'Jonas'); // prints Jonas
+
+console.log('Hello' && 23 && null && 'Jonas');//prints null
+
+if (restaurant.orderPizza){
+  restaurant.orderPizza('mushrooms', 'spinach')
+}
+
+//prints mushrooms ['spinach']
+
+restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach')
+
+//prints mushrooms ['spinach']
+
+
+
 
