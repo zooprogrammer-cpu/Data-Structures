@@ -46,31 +46,31 @@ const restaurant = {
   },
 };
 
-//Object.keys
-const properties = Object.keys(openingHours) // ["wed", "thu", "sat"]
-console.log(properties);
-let openStr = `We are open on ${properties.length} days -`
+const orderSet = new Set(['Pizza','Pizza','Risotto','Pasta','Pasta'])
+console.log(orderSet); // {"Pizza", "Risotto", "Pasta"}
 
-for (const day of properties){
-  openStr += `${day},`
+console.log(orderSet.size); //3
+
+console.log(orderSet.has('Pizza')); //true
+
+orderSet.add('Garlic Bread')
+orderSet.add('Garlic Bread')
+
+console.log(orderSet); // {"Pizza", "Risotto", "Pasta", "Garlic Bread"}
+
+orderSet.delete('Risotto')
+
+console.log(orderSet); //{"Pizza", "Pasta", "Garlic Bread"}
+
+for(const item of orderSet){
+  console.log(item);
 }
-console.log(openStr); //We are open on 3 days -wed,thu,sat,
 
-//Property values
-//Object.values
-const values = Object.values(openingHours)
-console.log(values); //[{open: 12, close: 22}, {open: 12, close: 24}, {open: 0, close: 24}] (3)
+// Example
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Waiter', 'Chef']
 
-// Entire Object
-const entries = Object.entries(openingHours);
-console.log(entries);  //[["wed", {open: 12, close: 22}], ["thu", {open: 12, close: 24}], ["sat", {open: 0, close: 24}]] (3) 
-
-for(const [key,{open,close}]of entries){
-  console.log(`On ${key}, we open at ${open} and close at ${close}`);
-}
-//prints
-// [Log] On wed, we open at 12 and close at 22 (script.js, line 69)
-// [Log] On thu, we open at 12 and close at 24 (script.js, line 69)
-// [Log] On sat, we open at 0 and close at 24 (script.js, line 69)
+const staffUnique = [...new Set(staff)]
+console.log(staffUnique); //prints ["Waiter", "Chef", "Manager"]
+console.log(new Set(['Waiter', 'Chef', 'Waiter', 'Manager', 'Waiter', 'Chef']).size); // prints 3
 
 
