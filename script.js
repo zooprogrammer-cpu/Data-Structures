@@ -46,41 +46,31 @@ const restaurant = {
   },
 };
 
-// if(restaurant.openingHours.mon)
-// console.log(restaurant.openingHours.mon.open);
+//Object.keys
+const properties = Object.keys(openingHours) // ["wed", "thu", "sat"]
+console.log(properties);
+let openStr = `We are open on ${properties.length} days -`
 
-//
-//With Optional Chaining. A property exists if not null or not undefined. 
-// it will try to read open only if mon exists.
-// console.log(restaurant.openingHours.mon?.open);
-// console.log(restaurant.openingHours?.mon?.open);
+for (const day of properties){
+  openStr += `${day},`
+}
+console.log(openStr); //We are open on 3 days -wed,thu,sat,
 
-const days = ['mon','tue','wed','thu','fri', 'sat', 'sun']
+//Property values
+//Object.values
+const values = Object.values(openingHours)
+console.log(values); //[{open: 12, close: 22}, {open: 12, close: 24}, {open: 0, close: 24}] (3)
 
-for (const item of days){
-  // console.log(item);
-  //using ?? here instead of || since sat.open is 0
-  const open = restaurant.openingHours[item]?.open ?? 'close';
-  console.log(`On ${item}day, we open at ${open} `);
+// Entire Object
+const entries = Object.entries(openingHours);
+console.log(entries);  //[["wed", {open: 12, close: 22}], ["thu", {open: 12, close: 24}], ["sat", {open: 0, close: 24}]] (3) 
+
+for(const [key,{open,close}]of entries){
+  console.log(`On ${key}, we open at ${open} and close at ${close}`);
 }
 //prints
-// [Log] On monday, we open at close  (script.js, line 64)
-// [Log] On tueday, we open at close  (script.js, line 64)
-// [Log] On wedday, we open at 12  (script.js, line 64)
-// [Log] On thuday, we open at 12  (script.js, line 64)
-// [Log] On friday, we open at close  (script.js, line 64)
-// [Log] On satday, we open at 0  (script.js, line 64)
-// [Log] On sunday, we open at close  (script.js, line 64)
+// [Log] On wed, we open at 12 and close at 22 (script.js, line 69)
+// [Log] On thu, we open at 12 and close at 24 (script.js, line 69)
+// [Log] On sat, we open at 0 and close at 24 (script.js, line 69)
 
-//Methods
-console.log(restaurant.order?.(0,1)?? `Method does not exist`);
 
-//Arrays
-const users = [
-  {name: 'Jonas', email: 'hello@jonas.com'}
-]
-
-console.log(users[0].name?? 'Users array empty'); //prints Jonas
-// this is the same as this- 
-if(users.length > 0) console.log(users[0].name) 
-else console.log(`user array is empty`); //prints Jonas
