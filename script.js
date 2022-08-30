@@ -20,6 +20,15 @@ const restaurant = {
     will be delivered to ${address} at ${time} `)
   },
 
+  orderPasta : function(ing1, ing2, ing3){
+    console.log(`Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`);
+  },
+
+  orderPizza : function(mainIngredient, ...otherIngredients){
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  },
+
   openingHours: {
     thu: {
       open: 12,
@@ -34,61 +43,87 @@ const restaurant = {
       close: 24,
     },
   },
+
+}
+//spread operator
+const arr = [7,8,9]
+const newArr = [1,2,3,...arr]
+console.log(newArr);
+
+console.log(...arr);
+
+const newMenu = [...restaurant.mainMenu, 'Gnocchi']
+console.log(newMenu);
+
+const mainMenu = [...restaurant.mainMenu]
+
+const menu =[...restaurant.mainMenu, ...restaurant.starterMenu]
+
+console.log(menu);
+
+// Iterables are arrays, strings, maps, sets but not objects
+const str = 'Jonas'
+const letters = [...str]
+console.log(letters);
+
+//const ingredients = [prompt('Let\'s make pasta! Ingredient 1?'),
+                    //prompt('Let\'s make pasta! Ingredient 2?'),
+                    //prompt('Let\'s make pasta! Ingredient 3?')]
+
+//console.log(ingredients);
+
+//restaurant.orderPasta(...ingredients) // prints Here is your delicious pasta with pasta, olives and tomato
+//Objects
+const newRestaurant = {...restaurant, founder: 'Guiseppe'}
+console.log(newRestaurant);
+
+const restaurantCopy = {...restaurant}
+
+restaurantCopy.restName = 'Ristorante Roma'
+
+console.log(restaurantCopy);
+//1. DESTRUCTURING
+// SPREAD is on the right side of = 
+const arr1 = [1,2,3,4]
+const arr2 = [...arr1]
+console.log(arr2); //print [1,2,3,4]
+
+//REST is on the left side - puts REST of the elements into a new array
+const [a,b,...others] = [1,2,3,4,5]
+console.log(a,b,others);//prints 1 2 [3,4,5]
+
+const [pizza, , risotto, ...otherFood]= [...restaurant.mainMenu, ...restaurant.starterMenu]
+
+console.log(pizza, risotto, otherFood);
+//prints [Log] Pizza – "Risotto" – ["Focaccia", "Bruschetta", "Garlic Bread", …] (4) (script.js, line 78)
+
+// Objects REST
+const {sat, ...weekdays} = restaurant.openingHours
+console.log(sat,weekdays);
+//{open: 0, close: 24}
+//{thu: {open: 12, close: 22}, fri: {open: 11, close: 23}}
+
+//2.) FUNCTIONS with rest arguements. turns it into array so that numbers is array
+const add = function(...numbers){
+  let sum = 0
+  for (let i =0; i < numbers.length; i++){
+    sum = sum + numbers[i]
+  }
+  console.log(sum);
+  // console.log(numbers);
 }
 
-restaurant.orderDelivery({
-  time: '22:30',
-  address : 'Via de Sole',
-  mainIndex : 2,
-  starterIndex: 2
-});
+add (1,2,3) //prints 6
+add (5,6,7,8) //prints 26
 
-restaurant.orderDelivery({
-  address : '314 Omega St',
-  mainIndex : 1,
-  starterIndex: 2  
-});
+const x =[23,5,7]
+add(...x)  // prints 35
+/////////
 
-// Object Destructuring
-const {restName, openingHours, categories} = restaurant
-
-console.log(restName, openingHours, categories);
-// changing the variable names 
-const {restName : restaurantName, openingHours : hours , categories : tags} = restaurant
-
-console.log(restaurantName, hours, tags);
-
-//Deafult values
-const {menu=[], starterMenu : starters =[]} = restaurant
-
-console.log(menu,starters);
-//[] (0) // this is the empty default array for menu
-//["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"] (4)
-
-//Mutating varaibles - not working.. working agter adding semi-colon after object declaration
-let a = 111
-let b = 999
-
-const obj = {a: 23, b: 56 , c: 77};
-//{a,b} = obj // this results in an error
-({a,b} = obj)
-console.log(a,b)
-
-/// Nested Objects Destructuring
-
-const {fri:{open,close}} = openingHours
-console.log(open,close); //11 – 23
-
-//can also rename the variable names here
-const {fri:{open:o,close:c}} = openingHours
-console.log(o,c); //11 – 23
-
-
-
-
-
-
-
+restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach')
+//mushrooms
+//["onion", "olives", "spinach"] 
+restaurant.orderPizza('mushrooms') // prints mushrooms []
 
 
 
