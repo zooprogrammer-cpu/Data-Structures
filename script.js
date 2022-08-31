@@ -1,76 +1,43 @@
 'use strict';
-const weekdays = ['mon','tue','wed','thu','fri', 'sat','sun']
+//Maps -  Datastrucure to map values to keys.
+// In maps, keyc can be any type, not just strings
+const rest = new Map()
+rest.set('name', 'Classico Italiano')
+rest.set(1, 'Firenze, Italy')
+console.log(rest.set(2, 'Lisbon, Portugal'));
+//Prints Map {"name" => "Classico Italiano",
+// 1 => "Firenze, Italy", 
+//2 => "Lisbon, Portugal"}
+rest.set('categories', ['Italian', 'Pizzeria', 'Vegeterian', 'Organic'])
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'We are open')
+  .set(false, 'We are closed')
 
-const openingHours = {
-  [weekdays[2]]:{
-    open: 12,
-    close: 22
-  },
-  [weekdays[3]]:{
-    open: 12,
-    close: 24
-  },
-  [weekdays[5]]:{
-    open: 0, // open 24 hrs
-    close: 24
-  }
-}
-const restaurant = {
-  name: 'Classico Italiano',
-  location: 'Via Angelo Tavanti 23, Firenze, Italy',
-  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
-  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
-  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-  openingHours,
-  // ES6 enhanced object literals
+console.log(rest);//
+//prints Map {"name" => "Classico Italiano", 
+//1 => "Firenze, Italy",
+// 2 => "Lisbon, Portugal", "
+//categories" => ["Italian", "Pizzeria", "Vegeterian", "Organic"], "open" => 11, …} (7)
 
-  order(starterIndex, mainIndex) {
-    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
-  },
+console.log(rest.get('name')); //Classico Italiano
+console.log(rest.get(true)); //We are open
+console.log(rest.get(1)); //Firenze, Italy
 
-  orderDelivery({ starterIndex = 1, mainIndex = 0, time = '20:00', address }) {
-    console.log(
-      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
-    );
-  },
+const time = 21
+console.log(rest.get(time > rest.get('open') && time<rest.get('close'))
+);
+ // turns this check to true which results in 
+ //rest.get(true) which gets the valu we are open
 
-  orderPasta(ing1, ing2, ing3) {
-    console.log(
-      `Here is your declicious pasta with ${ing1}, ${ing2} and ${ing3}`
-    );
-  },
+ console.log(rest.has('categories'));
+ rest.delete(2)
+ console.log(rest.size);
+//  rest.clear()
+const arr = [1,2]
+rest.set(arr, 'Test')
+console.log(rest);
+console.log(rest.get(arr));
 
-  orderPizza(mainIngredient, ...otherIngredients) {
-    console.log(mainIngredient);
-    console.log(otherIngredients);
-  },
-};
-
-const orderSet = new Set(['Pizza','Pizza','Risotto','Pasta','Pasta'])
-console.log(orderSet); // {"Pizza", "Risotto", "Pasta"}
-
-console.log(orderSet.size); //3
-
-console.log(orderSet.has('Pizza')); //true
-
-orderSet.add('Garlic Bread')
-orderSet.add('Garlic Bread')
-
-console.log(orderSet); // {"Pizza", "Risotto", "Pasta", "Garlic Bread"}
-
-orderSet.delete('Risotto')
-
-console.log(orderSet); //{"Pizza", "Pasta", "Garlic Bread"}
-
-for(const item of orderSet){
-  console.log(item);
-}
-
-// Example
-const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Waiter', 'Chef']
-
-const staffUnique = [...new Set(staff)]
-console.log(staffUnique); //prints ["Waiter", "Chef", "Manager"]
-console.log(new Set(['Waiter', 'Chef', 'Waiter', 'Manager', 'Waiter', 'Chef']).size); // prints 3
-
-
+rest.set(document.querySelector('h1'), 'Heading')
+console.log(rest);
