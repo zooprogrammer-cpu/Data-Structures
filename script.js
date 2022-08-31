@@ -1,43 +1,49 @@
-'use strict';
-//Maps -  Datastrucure to map values to keys.
-// In maps, keyc can be any type, not just strings
-const rest = new Map()
-rest.set('name', 'Classico Italiano')
-rest.set(1, 'Firenze, Italy')
-console.log(rest.set(2, 'Lisbon, Portugal'));
-//Prints Map {"name" => "Classico Italiano",
-// 1 => "Firenze, Italy", 
-//2 => "Lisbon, Portugal"}
-rest.set('categories', ['Italian', 'Pizzeria', 'Vegeterian', 'Organic'])
-  .set('open', 11)
-  .set('close', 23)
-  .set(true, 'We are open')
-  .set(false, 'We are closed')
+const question = new Map([
+  ['question', 'What is the best programming language in the world?'],
+  [1,'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct 🎉'],
+  [false, 'Try again!'] 
+]);
+console.log(question);
 
-console.log(rest);//
-//prints Map {"name" => "Classico Italiano", 
-//1 => "Firenze, Italy",
-// 2 => "Lisbon, Portugal", "
-//categories" => ["Italian", "Pizzeria", "Vegeterian", "Organic"], "open" => 11, …} (7)
+// Convert Object to Map
+const openingHours = {
+  thu: {
+    open: 12,
+    close: 22,
+  },
+  fri: {
+    open: 11,
+    close: 23,
+  },
+  sat: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+}
 
-console.log(rest.get('name')); //Classico Italiano
-console.log(rest.get(true)); //We are open
-console.log(rest.get(1)); //Firenze, Italy
+const hoursMap = new Map(Object.entries(openingHours))
+console.log(hoursMap);
 
-const time = 21
-console.log(rest.get(time > rest.get('open') && time<rest.get('close'))
-);
- // turns this check to true which results in 
- //rest.get(true) which gets the valu we are open
+//Iterate over Maps
+console.log(question.get('question'));
+for (const [key,value] of question){
+  if(typeof key === 'number')
+  console.log(`Answer ${key} : ${value}`);
+}
 
- console.log(rest.has('categories'));
- rest.delete(2)
- console.log(rest.size);
-//  rest.clear()
-const arr = [1,2]
-rest.set(arr, 'Test')
-console.log(rest);
-console.log(rest.get(arr));
+//prints
+//[Log] Answer 1 : C (script.js, line 34)
+// [Log] Answer 2 : Java (script.js, line 34)
+// [Log] Answer 3 : JavaScript (script.js, line 34)
+// [Log] Live reload enabled. (127.0.0.1, line 64)
+const answer = Number(prompt(`Your answer`))
+console.log(answer);
 
-rest.set(document.querySelector('h1'), 'Heading')
-console.log(rest);
+console.log(question.get(question.get('correct')=== answer));
+
+//convert map to array
+console.log([...question]);
